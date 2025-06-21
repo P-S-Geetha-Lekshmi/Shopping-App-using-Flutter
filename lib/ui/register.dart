@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../widgets/constant.dart';
+import '../widgets/custom_input.dart';
+import '../widgets/main_button.dart';
+import '../widgets/social_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -19,7 +23,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               SizedBox(height: height * 0.06),
               Text(
-                "Sign Up",
+                AppTexts.signup,
                 style: TextStyle(
                   fontSize: width * 0.08,
                   fontWeight: FontWeight.bold,
@@ -27,24 +31,24 @@ class SignUpScreen extends StatelessWidget {
               ),
               SizedBox(height: height * 0.015),
               Text(
-                "Create an account so you can order your favorite products easily and quickly.",
+                AppTexts.jkk,
                 style: TextStyle(
                   fontSize: width * 0.04,
                   color: Colors.black,
                 ),
               ),
               SizedBox(height: height * 0.04),
-              _input("Username", width),
+              CustomInput(hint: "Username", width: width),
               SizedBox(height: height * 0.015),
-              _input("Email", width),
+              CustomInput(hint: "Email", width: width),
               SizedBox(height: height * 0.015),
-              _input("Password", width, obscure: true),
+              CustomInput(hint: "Password", width: width, obscure: true),
               SizedBox(height: height * 0.03),
-              _mainButton("Register Now", width, onPressed: () {}),
+              MainButton(text: "Register Now", width: width, onPressed: () {}),
               SizedBox(height: height * 0.05),
               Center(
                 child: Text(
-                  "=========== Or Continue With ===========",
+                  AppTexts.io,
                   style: TextStyle(
                     fontSize: width * 0.035,
                     color: Colors.black54,
@@ -52,7 +56,14 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: height * 0.03),
-              _socialButtons(width),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SocialButton(text: "G", color: Colors.red, width: width),
+                  SizedBox(width: width * 0.05),
+                  SocialButton(text: "f", color: Colors.blue, width: width),
+                ],
+              ),
               SizedBox(height: height * 0.06),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +72,7 @@ class SignUpScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Text(
-                      "Log In",
+                      AppTexts.login,
                       style: TextStyle(
                         color: Colors.orange,
                         fontWeight: FontWeight.bold,
@@ -73,67 +84,6 @@ class SignUpScreen extends StatelessWidget {
               ),
               SizedBox(height: height * 0.02),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _input(String hint, double width, {bool obscure = false}) {
-    return TextField(
-      obscureText: obscure,
-      decoration: InputDecoration(
-        hintText: hint,
-        hintStyle: TextStyle(fontSize: width * 0.04),
-        suffixIcon: obscure ? const Icon(Icons.visibility_off) : null,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-        filled: true,
-        fillColor: Colors.grey[100],
-      ),
-    );
-  }
-
-  Widget _mainButton(String text, double width, {required VoidCallback onPressed}) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.orange,
-        foregroundColor: Colors.white,
-        minimumSize: Size(double.infinity, width * 0.13),
-      ),
-      onPressed: onPressed,
-      child: Text(
-        text,
-        style: TextStyle(fontSize: width * 0.045),
-      ),
-    );
-  }
-
-  Widget _socialButtons(double width) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _socialBtn("G", Colors.red, width),
-        SizedBox(width: width * 0.05),
-        _socialBtn("f", Colors.blue, width),
-      ],
-    );
-  }
-
-  Widget _socialBtn(String text, Color color, double width) {
-    return Container(
-      width: width * 0.35,
-      height: width * 0.1,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: width * 0.05,
-            fontWeight: FontWeight.bold,
           ),
         ),
       ),

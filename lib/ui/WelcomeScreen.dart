@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:geetha_myntraa/ui/login.dart';
 import 'package:geetha_myntraa/ui/register.dart';
 
+import '../widgets/constant.dart';
+import '../widgets/custom_button.dart';
+
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
@@ -10,7 +13,6 @@ class WelcomeScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
-    // Responsive values
     final double padding = width * 0.08;
     final double titleFont = width * 0.07;
     final double subtitleFont = width * 0.04;
@@ -33,7 +35,7 @@ class WelcomeScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Text(
-                "Start Your Shopping Journey Now",
+                AppTexts.homeTitle,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: titleFont,
@@ -42,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                AppTexts.desc,
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: subtitleFont,
@@ -51,36 +53,25 @@ class WelcomeScreen extends StatelessWidget {
               ),
               Column(
                 children: [
-                  _button(context, "Log In", const LoginScreen(), filled: false, height: buttonHeight, fontSize: buttonFontSize),
+                  CustomButton(
+                    text: AppTexts.login,
+                    page: const LoginScreen(),
+                    filled: false,
+                    height: buttonHeight,
+                    fontSize: buttonFontSize,
+                  ),
                   SizedBox(height: height * 0.02),
-                  _button(context, "Sign Up", const SignUpScreen(), filled: true, height: buttonHeight, fontSize: buttonFontSize),
+                  CustomButton(
+                    text: AppTexts.signup,
+                    page: const SignUpScreen(),
+                    filled: true,
+                    height: buttonHeight,
+                    fontSize: buttonFontSize,
+                  ),
                 ],
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  static Widget _button(BuildContext ctx, String text, Widget page,
-      {bool filled = true, required double height, required double fontSize}) {
-    return SizedBox(
-      width: double.infinity,
-      height: height,
-      child: OutlinedButton(
-        onPressed: () => Navigator.push(ctx, MaterialPageRoute(builder: (_) => page)),
-        style: OutlinedButton.styleFrom(
-          backgroundColor: filled ? Colors.orange : Colors.transparent,
-          foregroundColor: Colors.white,
-          side: const BorderSide(color: Colors.orange),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5),
-          ),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(fontSize: fontSize),
         ),
       ),
     );
