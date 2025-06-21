@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:geetha_myntraa/ui/WelcomeScreen.dart';
-import 'package:geetha_myntraa/ui/register.dart' show Register;
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -10,9 +9,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Geetha Myntraa',
       debugShowCheckedModeBanner: false,
-      home: WelcomeScreen(), // Fixed name
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        fontFamily: 'Roboto',
+        useMaterial3: true,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: Colors.black),
+        ),
+      ),
+      home: const WelcomeScreen(),
     );
   }
 }
-

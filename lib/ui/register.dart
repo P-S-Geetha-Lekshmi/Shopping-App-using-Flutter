@@ -1,63 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:geetha_myntraa/main.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(30),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: width * 0.08),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
-              const Text(
+              SizedBox(height: height * 0.06),
+              Text(
                 "Sign Up",
-                style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                "Create an account so you can order your favorite products easily and quickly.",
-                style: TextStyle(fontSize: 16, color: Colors.black),
-              ),
-              const SizedBox(height: 30),
-              _input("Username"),
-              const SizedBox(height: 10),
-              _input("Email"),
-              const SizedBox(height: 10),
-              _input("Password", obscure: true),
-              const SizedBox(height: 20),
-              _mainButton("Register Now", onPressed: () {}),
-              const SizedBox(height: 40),
-              const Center(
-                child: Text(
-                  "=========== Or Continue With ===========",
-                  style: TextStyle(color: Colors.black54),
+                style: TextStyle(
+                  fontSize: width * 0.08,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 30),
-              _socialButtons(),
-              const Spacer(),
+              SizedBox(height: height * 0.015),
+              Text(
+                "Create an account so you can order your favorite products easily and quickly.",
+                style: TextStyle(
+                  fontSize: width * 0.04,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: height * 0.04),
+              _input("Username", width),
+              SizedBox(height: height * 0.015),
+              _input("Email", width),
+              SizedBox(height: height * 0.015),
+              _input("Password", width, obscure: true),
+              SizedBox(height: height * 0.03),
+              _mainButton("Register Now", width, onPressed: () {}),
+              SizedBox(height: height * 0.05),
+              Center(
+                child: Text(
+                  "=========== Or Continue With ===========",
+                  style: TextStyle(
+                    fontSize: width * 0.035,
+                    color: Colors.black54,
+                  ),
+                ),
+              ),
+              SizedBox(height: height * 0.03),
+              _socialButtons(width),
+              SizedBox(height: height * 0.06),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("Already Have An Account? "),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text(
+                    onTap: () => Navigator.pop(context),
+                    child: Text(
                       "Log In",
-                      style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: Colors.orange,
+                        fontWeight: FontWeight.bold,
+                        fontSize: width * 0.042,
+                      ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 0),
+              SizedBox(height: height * 0.02),
             ],
           ),
         ),
@@ -65,12 +79,13 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  Widget _input(String hint, {bool obscure = false}) {
+  Widget _input(String hint, double width, {bool obscure = false}) {
     return TextField(
       obscureText: obscure,
       decoration: InputDecoration(
-        suffixIcon: obscure ? const Icon(Icons.visibility_off) : null,
         hintText: hint,
+        hintStyle: TextStyle(fontSize: width * 0.04),
+        suffixIcon: obscure ? const Icon(Icons.visibility_off) : null,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         filled: true,
         fillColor: Colors.grey[100],
@@ -78,33 +93,36 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  Widget _mainButton(String text, {required VoidCallback onPressed}) {
+  Widget _mainButton(String text, double width, {required VoidCallback onPressed}) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.orange,
         foregroundColor: Colors.white,
-        minimumSize: const Size.fromHeight(50),
+        minimumSize: Size(double.infinity, width * 0.13),
       ),
       onPressed: onPressed,
-      child: Text(text),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: width * 0.045),
+      ),
     );
   }
 
-  Widget _socialButtons() {
+  Widget _socialButtons(double width) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _socialBtn("G", Colors.red),
-        const SizedBox(width: 20),
-        _socialBtn("f", Colors.blue),
+        _socialBtn("G", Colors.red, width),
+        SizedBox(width: width * 0.05),
+        _socialBtn("f", Colors.blue, width),
       ],
     );
   }
 
-  Widget _socialBtn(String text, Color color) {
+  Widget _socialBtn(String text, Color color, double width) {
     return Container(
-      width: 140,
-      height: 40,
+      width: width * 0.35,
+      height: width * 0.1,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(10),
@@ -112,9 +130,9 @@ class SignUpScreen extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.white,
-            fontSize: 20,
+            fontSize: width * 0.05,
             fontWeight: FontWeight.bold,
           ),
         ),
